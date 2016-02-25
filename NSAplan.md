@@ -7,7 +7,7 @@
 
 * Title
    * NSAppointments
-   * Icon-font for new Page
+   * Icon-font for new Appointment <i class="fa fa-plus"></i>
 * Search Bar
    * magnifying glass to show that it's a Search
    * Placeholder Text?
@@ -23,7 +23,8 @@
 ### Make an Appointment Page:
 
 * Title
-   * icon font to navigate back to Landing Page
+   * icon font to navigate back to Landing Page <i class="fa fa-angle-left"></i>
+
    * title to let user know we're on new appt Page
    * bottom border
 * Form:
@@ -42,7 +43,9 @@
 ### Details Page:
 
 * Title
-   * icon back to landing Page
+   * icon back to landing Page <i class="fa fa-angle-left"></i>
+
+
    * name of Appointment as title
    * btm border
 * Details from Form
@@ -62,7 +65,9 @@
 ### Edit a Page:
 
 * title  
-   * icon to go to Details
+   * icon to go to Details <i class="fa fa-angle-left"></i>
+
+
    * another icon to go to landing page?
    * title
 * form w/ info populated from previous form
