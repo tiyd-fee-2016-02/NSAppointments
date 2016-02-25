@@ -1,0 +1,54 @@
+.landing-page{
+  background: #fff;
+  font-size: 3em;
+}
+header.landing-page{
+  border-bottom: 2px #ddd solid;
+  padding-bottom: 20px;
+  padding-top: 30px;
+  margin: 0 2% 0 2%;
+  text-align:center;
+  font-weight: 100;
+  color: rgb(66, 255, 198);
+  font-family: 'Tulpen One', cursive;
+}
+i.fa-plus{
+  display: inline;
+  position: relative;
+  color: #aaa;
+  font-size: 100px;
+  font-weight: 10;
+  float: right;
+  margin-top: 3%;
+  margin-left: -10%;
+  /*padding-bottom: 70px;*/
+
+  /*border: 1px red solid;*/
+}
+i.fa-search{
+  color: #aaa;
+  font-size: 70px;
+  font-weight: 10;
+  display: inline;
+  padding-top: -10%;
+  position: absolute;
+  right: 70px;
+  top: 260px;
+  border: 1px red solid;
+}
+
+#apptSearchBar
+{
+  margin: 5% 5% 2% 5%;
+  width: 80%;
+  height: 100px;
+  font-size: 1.5em;
+  color: #aaa;
+  border: 2px solid #aaa;
+  border-right: #fff;
+  resize: none;
+  outline: none;
+}
+.off{
+  display: none;
+}
