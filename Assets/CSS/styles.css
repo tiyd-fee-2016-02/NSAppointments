@@ -1,3 +1,7 @@
+body {
+   font-family: 'Tulpen One', cursive;
+}
+
 .landing-page{
   background: #fff;
   font-size: 3em;
@@ -10,8 +14,8 @@ header.landing-page{
   text-align:center;
   font-weight: 100;
   color: rgb(66, 255, 198);
-  font-family: 'Tulpen One', cursive;
 }
+
 i.fa-plus{
   display: inline;
   position: relative;
@@ -49,12 +53,74 @@ i.fa-search{
   resize: none;
   outline: none;*/
 }
-/*.off{
+.off{
   display: none;
-}*/
+}
+
+
+
+/******        This is the styling for the New Appointment Page            ******/
+
+.new-appointment-page {
+   border: 1px solid red;
+}
+
+.new-appointment-page-header {
+   font-size: 5em;
+   padding: 0.5em 0;
+   margin: 0 0.5em;
+   border-bottom: 1px solid #888;
+}
+
+.new-appointment-page-header i {
+   float: left;
+}
+
+.new-appointment-page-header h2 {
+   text-align: center;
+}
+
+.new-appointment-form {
+   width: 100%;
+   font-size: 3em;
+   padding-top: 1em;
+}
+
+.new-appointment-input {
+   width: 100%;
+}
+
+.new-appointment-input label {
+   width: 90%;
+   margin-left: 5%;
+   font-size: 1.5em;
+}
+
+
+.new-appointment-input input {
+   width: 90%;
+   margin-left: 5%;
+   margin-top: 0.5em;
+   margin-bottom: 1em;
+   padding: 0.3%;
+   border: 3px solid #eee;
+   border-radius: 3px;
+   font-size: 1em;
+}
+
+.new-appointment-input textarea {
+   width: 90%;
+   font-size: 1em;
+   margin-left: 5%;
+   margin-bottom: 1em;
+   border: 3px solid #eee;
+
+}
 
 #appointment-submit {
-   padding: 20px;
-   height: 300px;
-   background-color: red;
+   width: 100%;
+   font-size: 1.3em;
+   background-color: rgb(100, 255, 198);
+   color: #eee;
+
 }

@@ -91,7 +91,10 @@ $("#appointment-submit").on("click", function(e){
 
 
 // this is going to take the object that's created when the user hits submit, and put it into localStorage
-var appt5 = new Appointment (localStorage.getItem.JSON.parse($("name")), localStorage.getItem.JSON.parse($("address")), localStorage.getItem.JSON.parse($("citystate")), localStorage.getItem.JSON.parse($("date")), localStorage.getItem.JSON.parse($("time")), localStorage.getItem.JSON.parse($("comments")));
+// var appt5 = new Appointment (localStorage.getItem.JSON.parse($("name")), localStorage.getItem.JSON.parse($("address")), localStorage.getItem.JSON.parse($("citystate")), localStorage.getItem.JSON.parse($("date")), localStorage.getItem.JSON.parse($("time")),
+// localStorage.getItem.JSON.parse($("comments")));
+
+
 
 function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, apptComments)
 {
@@ -101,7 +104,7 @@ function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, 
     this.apptDate = apptDate;
     this.apptTime = apptTime;
     this.apptComments = apptComments;
-    this.apptMEGT =  true;
+    this.apptMEGT =  true;}
 
 
 // var appt = localStorage.getItem.JSON.parse($("name"));
@@ -117,6 +120,5 @@ function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, 
 
 
 // this puts the information that we retrieve from local storage into the html
-
 
 });
