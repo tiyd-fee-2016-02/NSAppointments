@@ -65,7 +65,7 @@ $(function(){
 // This is going to get the input from the form and turn it into an object
 
 
-var apptInfo = {};
+var apptInfo = [];
 
 $("#appointment-submit").on("click", function(e){
    e.preventDefault();
@@ -78,16 +78,30 @@ $("#appointment-submit").on("click", function(e){
 
 $("#appointment-submit").on("click", function(e){
    e.preventDefault();
-   localStorage.setItem(name, JSON.stringify($("#appointment-name").val()));
-   localStorage.setItem(date, JSON.stringify($("#appointment-date").val()));
-   apptInfo.time = $("#appointment-time").val();
-   apptInfo.address = $("#appointment-address").val();
-   console.log(apptInfo);
+   localStorage.setItem("name", JSON.stringify($("#appointment-name").val()));
+   localStorage.setItem("date", JSON.stringify($("#appointment-date").val()));
+   localStorage.setItem("time", JSON.stringify($("#appointment-time").val()));
+   localStorage.setItem("address", JSON.stringify($("#appointment-address").val()));
+   localStorage.setItem("citystate", JSON.stringify($("#appointment-city-state").val()));
+   localStorage.setItem("comments", JSON.stringify($("#appointment-comments").val()));
+   console.log(localStorage);
 });
+
+
 
 // this is going to take the object that's created when the user hits submit, and put it into localStorage
 
+var apptName = localStorage.getItem("name");
+var apptTime = localStorage.getItem("time");
+var apptDate = localStorage.getItem("date");
+var apptAddress = localStorage.getItem("address");
+var apptCityState = localStorage.getItem("citystate");
+var comments = localStorage.getItem("comments");
+
+
+
 // this retrieves the information out of local storage
+
 
 // this puts the information that we retrieve from local storage into the html
 
