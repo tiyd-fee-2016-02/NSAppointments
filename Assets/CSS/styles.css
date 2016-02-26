@@ -1,7 +1,3 @@
-body {
-   font-family: 'Tulpen One', cursive;
-}
-
 .landing-page{
   background: #fff;
   font-size: 3em;
@@ -63,6 +59,8 @@ i.fa-search{
 
 .new-appointment-page {
    border: 1px solid red;
+   font-family: helvetica, sans-serif;
+   color: #999;
 }
 
 .new-appointment-page-header {
@@ -78,6 +76,7 @@ i.fa-search{
 
 .new-appointment-page-header h2 {
    text-align: center;
+   color: black;
 }
 
 .new-appointment-form {
@@ -87,13 +86,13 @@ i.fa-search{
 }
 
 .new-appointment-input {
-   width: 100%;
+   width: 90%;
+   margin-left: 5%;
 }
 
 .new-appointment-input label {
    width: 90%;
-   margin-left: 5%;
-   font-size: 1.5em;
+   /*font-size: 1.5em;*/
 }
 
 
@@ -101,11 +100,11 @@ i.fa-search{
    width: 90%;
    margin-left: 5%;
    margin-top: 0.5em;
-   margin-bottom: 1em;
+   margin-bottom: 0.5em;
    padding: 0.3%;
    border: 3px solid #eee;
    border-radius: 3px;
-   font-size: 1em;
+   font-size: 1.5em;
 }
 
 .new-appointment-input textarea {
@@ -114,13 +113,21 @@ i.fa-search{
    margin-left: 5%;
    margin-bottom: 1em;
    border: 3px solid #eee;
+}
 
+.forborder {
+   border: 4px solid #eee;
+   width: 90%;
+   margin-left: 5%;
+   display: block;
+   margin-bottom: 0.5em;
 }
 
 #appointment-submit {
    width: 100%;
    font-size: 1.3em;
-   background-color: rgb(100, 255, 198);
+   background-color: rgb(66, 255, 198);
    color: #eee;
-
+   border: none;
+   padding: 0.2em 0;
 }
