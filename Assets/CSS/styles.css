@@ -10,6 +10,7 @@ header.landing-page{
   text-align:center;
   font-weight: 100;
   color: rgb(66, 255, 198);
+  font-family: 'Tulpen One', script;
 }
 
 i.fa-plus{
@@ -54,6 +55,42 @@ i.fa-search{
   border-right: #fff;
   resize: none;
   outline: none;
+}
+
+#appointment-submit {
+   width: 100%;
+   font-size: 1.3em;
+   background-color: rgb(66, 255, 198);
+   color: #eee;
+   border: none;
+   padding: 0.2em 0;
+}
+#apptContainer{
+  font-family: helvetica, sans-serif;
+  background-color: #eee;
+  margin: 5% 4% 2% 4%;
+  width: 89%;
+  font-size: 1em;
+}
+#weather-box{
+  background-color: rgb(66, 255, 198);
+  display: inline-block;
+  padding: 3%;
+  color: #fff;
+}
+#apptInfoBox{
+  font-size: 1em;
+  display:inline-block;
+  padding: 4%;
+  padding-left: 5%;
+  color: #aaa;
+}
+#appointment-title{
+  font-size: 1.3em;
+  color: #000;
+}
+a{
+  text-decoration: none;
 }
 .off{
   display: none;
@@ -125,41 +162,4 @@ i.fa-search{
    margin-left: 5%;
    display: block;
    margin-bottom: 0.5em;
-}
-
-
-#appointment-submit {
-   width: 100%;
-   font-size: 1.3em;
-   background-color: rgb(66, 255, 198);
-   color: #eee;
-   border: none;
-   padding: 0.2em 0;
-}
-#apptContainer{
-  font-family: helvetica, sans-serif;
-  background-color: #eee;
-  margin: 5% 4% 2% 4%;
-  width: 89%;
-  font-size: 1em;
-}
-#weather-box{
-  background-color: rgb(66, 255, 198);
-  display: inline-block;
-  padding: 3%;
-  color: #fff;
-}
-#apptInfoBox{
-  font-size: 1em;
-  display:inline-block;
-  padding: 4%;
-  padding-left: 5%;
-  color: #aaa;
-}
-#appointment-title{
-  font-size: 1.3em;
-  color: #000;
-}
-a{
-  text-decoration: none;
 }
