@@ -65,6 +65,7 @@ i.fa-search{
    background-color: red;
 }
 #apptContainer{
+  font-family: helvetica, sans-serif;
   background-color: #eee;
   margin: 5% 4% 2% 4%;
   width: 89%;
