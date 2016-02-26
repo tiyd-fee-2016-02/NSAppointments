@@ -78,8 +78,8 @@ $("#appointment-submit").on("click", function(e){
 
 $("#appointment-submit").on("click", function(e){
    e.preventDefault();
-   localStorage.setItem("name", JSON.stringify($("#appointment-name").val()));
-   localStorage.setItem("date", JSON.stringify($("#appointment-date").val()));
+   localStorage.setItem(name, JSON.stringify($("#appointment-name").val()));
+   localStorage.setItem(date, JSON.stringify($("#appointment-date").val()));
    apptInfo.time = $("#appointment-time").val();
    apptInfo.address = $("#appointment-address").val();
    console.log(apptInfo);
