@@ -13,6 +13,8 @@ function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, 
     this.apptComments = apptComments;
     this.apptMEGT =  true;
 };
+
+
 //
 // function getLocalStorage()
 // {
@@ -75,6 +77,7 @@ $("#appointment-submit").on("click", function(e){
    apptInfo.apptCityState = $("#appointment-city-state").val();
    apptInfo.apptComments = $("#appointment-comments").val();
       console.log(apptInfo);
+
 });
 
 $("#appointment-submit").on("click", function(e){
@@ -113,8 +116,6 @@ function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, 
 // var apptAddress = localStorage.getItem("address");
 // var apptCityState = localStorage.getItem("citystate");
 // var comments = localStorage.getItem("comments");
-
-
 
 // this retrieves the information out of local storage
 

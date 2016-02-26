@@ -23,7 +23,10 @@ i.fa-plus{
   margin-left: -10%;
   padding-bottom: 70px;
 
-  border: 1px red solid;
+  /*border: 1px red solid;*/
+}
+i.fa-plus:hover{
+  color: rgb(66, 255, 198);
 }
 i.fa-search{
   color: #aaa;
@@ -31,10 +34,13 @@ i.fa-search{
   font-weight: 10;
   display: inline;
   padding-top: -10%;
+  padding: 17px;
   position: absolute;
-  right: 70px;
-  top: 260px;
-  border: 1px red solid;
+  right: 67px;
+  top: 245px;
+  border-top: 2px #aaa solid;
+  border-bottom:2px #aaa solid;
+  border-right: 2px #aaa solid;
 }
 
 #apptSearchBar
@@ -47,13 +53,11 @@ i.fa-search{
   border: 2px solid #aaa;
   border-right: #fff;
   resize: none;
-  outline: none;*/
+  outline: none;
 }
 .off{
   display: none;
 }
-
-
 
 /******        This is the styling for the New Appointment Page            ******/
 
@@ -123,6 +127,7 @@ i.fa-search{
    margin-bottom: 0.5em;
 }
 
+
 #appointment-submit {
    width: 100%;
    font-size: 1.3em;
@@ -130,4 +135,31 @@ i.fa-search{
    color: #eee;
    border: none;
    padding: 0.2em 0;
+}
+#apptContainer{
+  font-family: helvetica, sans-serif;
+  background-color: #eee;
+  margin: 5% 4% 2% 4%;
+  width: 89%;
+  font-size: 1em;
+}
+#weather-box{
+  background-color: rgb(66, 255, 198);
+  display: inline-block;
+  padding: 3%;
+  color: #fff;
+}
+#apptInfoBox{
+  font-size: 1em;
+  display:inline-block;
+  padding: 4%;
+  padding-left: 5%;
+  color: #aaa;
+}
+#appointment-title{
+  font-size: 1.3em;
+  color: #000;
+}
+a{
+  text-decoration: none;
 }
