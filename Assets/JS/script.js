@@ -1,18 +1,18 @@
 $(function(){
    'use strict';
 
-//
-// //This is the constructor for our appointment objects.
-// function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, apptComments)
-// {
-//     this.apptTitle = apptTitle;
-//     this.apptAddress = apptAddress;
-//     this.apptCityState = apptCityState;
-//     this.apptDate = apptDate;
-//     this.apptTime = apptTime;
-//     this.apptComments = apptComments;
-//     this.apptMEGT =  true;
-// }
+
+//This is the constructor for our appointment objects.
+function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, apptComments)
+{
+    this.apptTitle = apptTitle;
+    this.apptAddress = apptAddress;
+    this.apptCityState = apptCityState;
+    this.apptDate = apptDate;
+    this.apptTime = apptTime;
+    this.apptComments = apptComments;
+    this.apptMEGT =  true;
+};
 //
 // function getLocalStorage()
 // {
@@ -61,19 +61,20 @@ $(function(){
 // console.log(getLocalStorage());
 
 
-
 // This is going to get the input from the form and turn it into an object
 
 
-var apptInfo = [];
+var apptInfo = new Appointment();
 
 $("#appointment-submit").on("click", function(e){
    e.preventDefault();
-   apptInfo.name = $("#appointment-name").val();
-   apptInfo.date = $("#appointment-date").val();
-   apptInfo.time = $("#appointment-time").val();
-   apptInfo.address = $("#appointment-address").val();
-   console.log(apptInfo);
+   apptInfo.apptTitle = $("#appointment-name").val();
+   apptInfo.apptDate = $("#appointment-date").val();
+   apptInfo.apptTime = $("#appointment-time").val();
+   apptInfo.apptAddress = $("#appointment-address").val();
+   apptInfo.apptCityState = $("#appointment-city-state").val();
+   apptInfo.apptComments = $("#appointment-comments").val();
+      console.log(apptInfo);
 });
 
 $("#appointment-submit").on("click", function(e){
@@ -90,13 +91,25 @@ $("#appointment-submit").on("click", function(e){
 
 
 // this is going to take the object that's created when the user hits submit, and put it into localStorage
+var appt5 = new Appointment (localStorage.getItem.JSON.parse($("name")), localStorage.getItem.JSON.parse($("address")), localStorage.getItem.JSON.parse($("citystate")), localStorage.getItem.JSON.parse($("date")), localStorage.getItem.JSON.parse($("time")), localStorage.getItem.JSON.parse($("comments")));
 
-var apptName = localStorage.getItem("name");
-var apptTime = localStorage.getItem("time");
-var apptDate = localStorage.getItem("date");
-var apptAddress = localStorage.getItem("address");
-var apptCityState = localStorage.getItem("citystate");
-var comments = localStorage.getItem("comments");
+function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, apptComments)
+{
+    this.apptTitle = apptTitle;
+    this.apptAddress = apptAddress;
+    this.apptCityState = apptCityState;
+    this.apptDate = apptDate;
+    this.apptTime = apptTime;
+    this.apptComments = apptComments;
+    this.apptMEGT =  true;
+
+
+// var appt = localStorage.getItem.JSON.parse($("name"));
+// var apptTime = localStorage.getItem.JSON.parse($("time"));
+// var apptDate = localStorage.getItem("date");
+// var apptAddress = localStorage.getItem("address");
+// var apptCityState = localStorage.getItem("citystate");
+// var comments = localStorage.getItem("comments");
 
 
 
