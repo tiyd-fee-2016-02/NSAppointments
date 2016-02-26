@@ -65,23 +65,29 @@ function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, 
 
 // This is going to get the input from the form and turn it into an object
 
-
-var apptInfo = new Appointment();
+var allAppts = [];
+var tempAppt = new Appointment();
 
 $("#appointment-submit").on("click", function(e){
    e.preventDefault();
-   apptInfo.apptTitle = $("#appointment-name").val();
-   apptInfo.apptDate = $("#appointment-date").val();
-   apptInfo.apptTime = $("#appointment-time").val();
-   apptInfo.apptAddress = $("#appointment-address").val();
-   apptInfo.apptCityState = $("#appointment-city-state").val();
-   apptInfo.apptComments = $("#appointment-comments").val();
-      console.log(apptInfo);
-
+   tempAppt.apptTitle = $("#appointment-name").val();
+   tempAppt.apptDate = $("#appointment-date").val();
+   tempAppt.apptTime = $("#appointment-time").val();
+   tempAppt.apptAddress = $("#appointment-address").val();
+   tempAppt.apptCityState = $("#appointment-city-state").val();
+   tempAppt.apptComments = $("#appointment-comments").val();
+   allAppts.push(tempAppt);
+   $(".new-appointment-page").addClass("off");
+   $(".landing-page").removeClass("off");
+   $(".details-page").addClass("off");
+   $(".edit-page").addClass("off");
 });
 
+
+
 $("#appointment-submit").on("click", function(e){
    e.preventDefault();
+
    localStorage.setItem("name", JSON.stringify($("#appointment-name").val()));
    localStorage.setItem("date", JSON.stringify($("#appointment-date").val()));
    localStorage.setItem("time", JSON.stringify($("#appointment-time").val()));
