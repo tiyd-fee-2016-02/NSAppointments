@@ -71,8 +71,39 @@ function landingPageUpdate()
 
 //========================GREG BELOW===========================================================================MATT ABOVE=================
 
+// This navigates back to the landing page from the new appointment page and the edit page
 
+$(".fa-angle-left").on("click", function()
+   {
+      console.log("click?");
+   $(".landing-page").removeClass("off");
+   $(".details-page").addClass("off");
+   $(".edit-page").addClass("off");
+   $(".new-appointment-page").addClass("off");
+   }
+);
 
+// this navigates to edit page from landing page
+
+$("#apptInfoBox").on("click", function()
+   {
+      console.log("click?");
+   $(".landing-page").addClass("off");
+   $(".details-page").removeClass("off");
+   $(".edit-page").addClass("off");
+   $(".new-appointment-page").addClass("off");
+   }
+);
+
+$(".details-page-footer").on("click", function()
+   {
+      console.log("click?");
+   $(".landing-page").addClass("off");
+   $(".details-page").addClass("off");
+   $(".edit-page").removeClass("off");
+   $(".new-appointment-page").addClass("off");
+   }
+);
 
 
 }); //end file
