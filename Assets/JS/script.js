@@ -144,7 +144,7 @@ $.getJSON("http://api.wunderground.com/api/c5a1b3a2f25bb11e/conditions/q/NC/durh
 
 // this sanitizes our city and state inputs, so we can effectively use the API
 if()
-{
+ {
 
 };
 
