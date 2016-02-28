@@ -1,6 +1,6 @@
 $(function(){
    'use strict';
-
+   localStorage.clear();
 
 //This is the constructor for our appointment objects.
 
@@ -15,7 +15,7 @@ function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, 
     this.apptMEGT =  true;
 };
 
-$(".fa-plus").on("click", function()
+$(".fa-plus").on("click", function()//if user clicks '+' go to add new appointment page.
    {
       console.log("click?");
    $(".landing-page").addClass("off");
@@ -26,10 +26,12 @@ $(".fa-plus").on("click", function()
    }
 );
 
+$("#apptDateInput").pickadate();//this uses a js plugin to get the date and time from the user.
+$("#apptTime").pickatime();
 
-var allAppts = [];
+
+var allAppts= [];
 var tempAppt = new Appointment();
-
 // This function takes the form info and puts it into an object tempAppt, then goes back to the landing page
 
 $("#appointment-submit").on("click", function(e){
@@ -40,27 +42,33 @@ $("#appointment-submit").on("click", function(e){
    tempAppt.apptAddress = $("#apptAddressInput").val();
    tempAppt.apptCityState = $("#apptCityStateInput").val();
    tempAppt.apptComments = $("#apptCommentsInput").val();
-   allAppts.push(tempAppt);
+
+   localStorage.setItem(("apptMEGL-" + tempAppt.apptTitle), JSON.stringify(tempAppt));//puts tempappt into local storage.
+   var temptemp = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle));//this pulls the thing I JUST PUT INTO LOCAL STORAGE into a new variable: temptemp
+
+   allAppts.push(temptemp);//this pushes temptemp into the allappts array.
+
+   //WHY DOES IT WORK THIS WAY?! i cant just take tempappt and push it into the allappts array. it overwrites all elements in allappts with tempappt. but If i put tempappt into local storage FIRST, then pull it down from localstorage into a NEW variable, and the push THAT vairable into allappts... it works fine! WTF!?
+
    $(".new-appointment-page").addClass("off");
    $(".landing-page").removeClass("off");
    $(".details-page").addClass("off");
    $(".edit-page").addClass("off");
-   console.log(tempAppt);
-   console.log(allAppts);
+
+   //console.log(tempAppt);
+
    landingPageUpdate();
 });
 
 // this function adds a new item in the landing page
-
 function landingPageUpdate()
 {
-   $(".appointment-list").html(" ");
-   for(var i = 0; i <= allAppts.length; i++)
+   $(".appointment-list").html(" ");//clears the current appointments on the landing page.
+   for(var i = 0; i < allAppts.length; i++)
    {
-      console.log(apptTime);
-      $(".appointment-list").append("<a href='#'><li id='apptContainer' class = 'NSAppointment'><span id = 'weather-box'class = 'appointment-information off'><div id = 'appointment-time' class = 'appointment-information'>" + allAppts[i].apptTime + "</div><div id = 'weather-information' class = 'appointment-information'><i class='fa fa-cloud fa-3x'></i></div></span><span id ='apptInfoBox' class='off'><div id = 'appointment-title' class = 'appointment-information'>" + allAppts[i].apptTitle + "</div><div id = 'appointment-address' class = 'appointment-information'>" + allAppts[i].apptAddress + "</div><div id = 'appointment-city-state' class = 'appointment-information'>&nbsp;&nbsp;&nbsp;&nbsp;" + allAppts[i].apptCityState + "</div></span></li></a>");
-      localStorage.setItem("appt"+i+"", JSON.stringify(tempAppt));
-      console.log(localStorage);
+      $(".appointment-list").append("<a href='#'><li id='apptContainer' class = 'NSAppointment'><span id = 'weather-box'class = 'appointment-information off'><div id = 'appointment-time' class = 'appointment-information'>" + allAppts[i].apptTime + "</div><div id = 'weather-information' class = 'appointment-information'><i class='fa fa-cloud fa-3x'></i></div></span><span id ='apptInfoBox' class='off'><div id = 'appointment-title' class = 'appointment-information'>" + allAppts[i].apptTitle + "</div><div id = 'appointment-address' class = 'appointment-information'>" + allAppts[i].apptAddress + "</div><div id = 'appointment-city-state' class = 'appointment-information'>&nbsp;&nbsp;&nbsp;&nbsp;@" + allAppts[i].apptCityState + "</div></span></li></a>");
+      // localStorage.setItem("appt"+i+"", JSON.stringify(tempAppt));
+      //console.log(localStorage);
 
    } //end for loop
 }; //end landingPageUpdate
