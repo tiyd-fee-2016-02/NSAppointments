@@ -258,6 +258,7 @@ a{
    font-size: 1em;
    box-sizing: border-box;
    border-right: 10px solid red;
+   margin: none;
 }
 
 .save-edit-button {
@@ -267,4 +268,5 @@ a{
    font-size: 1em;
    box-sizing: border-box;
    border-left: 10px solid rgb(66, 255, 198);
+   margin: none;
 }
