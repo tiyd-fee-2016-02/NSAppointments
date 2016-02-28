@@ -4,11 +4,12 @@ $(function(){
 
 //This is the constructor for our appointment objects.
 
-function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, apptComments)
+function Appointment(apptTitle, apptAddress, apptCity, apptState, apptDate, apptTime, apptComments)
 {
     this.apptTitle = apptTitle;
     this.apptAddress = apptAddress;
-    this.apptCityState = apptCityState;
+    this.apptCity = apptCity;
+    this.apptState = apptState;
     this.apptDate = apptDate;
     this.apptTime = apptTime;
     this.apptComments = apptComments;
@@ -26,7 +27,8 @@ $(".fa-plus").on("click", function()//if user clicks '+' go to add new appointme
    }
 );
 
-$("#apptDateInput").pickadate();//this uses a js plugin to get the date and time from the user.
+$("#apptDateInput").pickadate({formatSubmit:'yyyy-mm-dd', hiddenName:true});//this uses a js plugin to get the date and time from the user.
+console.log($("#apptDateInput").val());
 $("#apptTime").pickatime();
 
 
@@ -40,7 +42,8 @@ $("#appointment-submit").on("click", function(e){
    tempAppt.apptDate = $("#apptDateInput").val();
    tempAppt.apptTime = $("#apptTime").val();
    tempAppt.apptAddress = $("#apptAddressInput").val();
-   tempAppt.apptCityState = $("#apptCityStateInput").val();
+   tempAppt.apptCity = $("#apptCityInput").val();
+   tempAppt.apptState = $("#apptStateInput").val();
    tempAppt.apptComments = $("#apptCommentsInput").val();
 
    localStorage.setItem(("apptMEGL-" + tempAppt.apptTitle), JSON.stringify(tempAppt));//puts tempappt into local storage.
@@ -66,7 +69,7 @@ function landingPageUpdate()
    $(".appointment-list").html(" ");//clears the current appointments on the landing page.
    for(var i = 0; i < allAppts.length; i++)
    {
-      $(".appointment-list").append("<a href='#'><li id='apptContainer' class = 'NSAppointment'><span id = 'weather-box'class = 'appointment-information off'><div id = 'appointment-time' class = 'appointment-information'>" + allAppts[i].apptTime + "</div><div id = 'weather-information' class = 'appointment-information'><i class='fa fa-cloud fa-3x'></i></div></span><span id ='apptInfoBox' class='off'><div id = 'appointment-title' class = 'appointment-information'>" + allAppts[i].apptTitle + "</div><div id = 'appointment-address' class = 'appointment-information'>" + allAppts[i].apptAddress + "</div><div id = 'appointment-city-state' class = 'appointment-information'>&nbsp;&nbsp;&nbsp;&nbsp;@" + allAppts[i].apptCityState + "</div></span></li></a>");
+      $(".appointment-list").append("<a href='#'><li id='apptContainer' class = 'NSAppointment'><span id = 'weather-box'class = 'appointment-information off'><div id = 'appointment-time' class = 'appointment-information'>" + allAppts[i].apptTime + "</div><div id = 'weather-information' class = 'appointment-information'>" + "</i></div></span><span id ='apptInfoBox' class='off'><div id = 'appointment-title' class = 'appointment-information'>" + allAppts[i].apptTitle + "</div><div id = 'appointment-address' class = 'appointment-information'>" + allAppts[i].apptAddress + "</div><div id = 'appointment-city' class = 'appointment-information'>@" + allAppts[i].apptCity + ", " + allAppts[i].apptState + "</div></span></li></a>");
       // localStorage.setItem("appt"+i+"", JSON.stringify(tempAppt));
       //console.log(localStorage);
 
@@ -82,7 +85,7 @@ function landingPageUpdate()
 //    localStorage.setItem("date", JSON.stringify($("#appointment-date").val()));
 //    localStorage.setItem("time", JSON.stringify($("#appointment-time").val()));
 //    localStorage.setItem("address", JSON.stringify($("#appointment-address").val()));
-//    localStorage.setItem("citystate", JSON.stringify($("#appointment-city-state").val()));
+//    localStorage.setItem("City", JSON.stringify($("#appointment-city").val()));
 //    localStorage.setItem("comments", JSON.stringify($("#appointment-comments").val()));
 //    console.log(localStorage);
 // });
@@ -138,22 +141,30 @@ for(var num = 0; num <= localStorage.length; num++)
 
 console.log(returnInformation);
 
+var today = new Date().toJSON();
 
 // This is the get wunderground api information JS
 
+// var getForecastInfo = function(date, time, city, state){
+//    $.getJSON("http://api.wunderground.com/api/c5a1b3a2f25bb11e/conditions/q/" + state + "/" + city + ".json", function(json);
+//    // if(time.indexof(PM) != -1)
+//    // {
+//    //
+//    // }
+// }
 $.getJSON("http://api.wunderground.com/api/c5a1b3a2f25bb11e/conditions/q/NC/durham.json", function(json)
 {
    $('#weather-information').html(json.current_observation.weather);
    //this gets the current observation weather and puts it in the weather box on the landing page.
-   $('#weather-information').html(json.current_observation.icon_url);
+   $('#weather-information').html(json.current_observation.icon_url); //gets the icon from wunderground
    $('#weather-information').html(json.current_observation.temp_f);
    $('#weather-information').html(json.current_observation.feelslike_f);
 });
 
 // this sanitizes our city and state inputs, so we can effectively use the API
-if()
- {
-
-};
+// if()
+//  {
+//
+// };
 
 }); //end file
