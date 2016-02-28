@@ -125,15 +125,35 @@ $(".details-page-footer").on("click", function()
    }
 );
 
-// This takes the tempAppt variable and puts it into local Storage
+// This takes the item in local Storage and puts it into an object that we can manipulate
 
-var returnObject = {};
+var returnInformation = {};
 
 for(var num = 0; num <= localStorage.length; num++)
 {
+
+   returnInformation = JSON.parse(localStorage.getItem('appt'+num+''));
    console.log(JSON.parse(localStorage.getItem('appt'+num+'')));
 };
 
+console.log(returnInformation);
 
+
+// This is the get wunderground api information JS
+
+$.getJSON("http://api.wunderground.com/api/c5a1b3a2f25bb11e/conditions/q/NC/durham.json", function(json)
+{
+   $('#weather-information').html(json.current_observation.weather);
+   //this gets the current observation weather and puts it in the weather box on the landing page.
+   $('#weather-information').html(json.current_observation.icon_url);
+   $('#weather-information').html(json.current_observation.temp_f);
+   $('#weather-information').html(json.current_observation.feelslike_f);
+});
+
+// this sanitizes our city and state inputs, so we can effectively use the API
+if()
+ {
+
+};
 
 }); //end file
