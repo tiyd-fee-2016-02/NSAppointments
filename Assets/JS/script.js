@@ -3,6 +3,7 @@ $(function(){
 
 
 //This is the constructor for our appointment objects.
+
 function Appointment(apptTitle, apptAddress, apptCityState, apptDate, apptTime, apptComments)
 {
     this.apptTitle = apptTitle;
@@ -29,11 +30,13 @@ $(".fa-plus").on("click", function()
 var allAppts = [];
 var tempAppt = new Appointment();
 
+// This function takes the form info and puts it into an object tempAppt, then goes back to the landing page
+
 $("#appointment-submit").on("click", function(e){
    e.preventDefault();
    tempAppt.apptTitle = $("#apptNameInput").val();
    tempAppt.apptDate = $("#apptDateInput").val();
-   tempAppt.apptTime = $("#apptTimeInput").val();
+   tempAppt.apptTime = $("#apptTime").val();
    tempAppt.apptAddress = $("#apptAddressInput").val();
    tempAppt.apptCityState = $("#apptCityStateInput").val();
    tempAppt.apptComments = $("#apptCommentsInput").val();
@@ -42,16 +45,23 @@ $("#appointment-submit").on("click", function(e){
    $(".landing-page").removeClass("off");
    $(".details-page").addClass("off");
    $(".edit-page").addClass("off");
+   console.log(tempAppt);
    console.log(allAppts);
    landingPageUpdate();
 });
+
+// this function adds a new item in the landing page
 
 function landingPageUpdate()
 {
    $(".appointment-list").html(" ");
    for(var i = 0; i <= allAppts.length; i++)
    {
+      console.log(apptTime);
       $(".appointment-list").append("<a href='#'><li id='apptContainer' class = 'NSAppointment'><span id = 'weather-box'class = 'appointment-information off'><div id = 'appointment-time' class = 'appointment-information'>" + allAppts[i].apptTime + "</div><div id = 'weather-information' class = 'appointment-information'><i class='fa fa-cloud fa-3x'></i></div></span><span id ='apptInfoBox' class='off'><div id = 'appointment-title' class = 'appointment-information'>" + allAppts[i].apptTitle + "</div><div id = 'appointment-address' class = 'appointment-information'>" + allAppts[i].apptAddress + "</div><div id = 'appointment-city-state' class = 'appointment-information'>&nbsp;&nbsp;&nbsp;&nbsp;" + allAppts[i].apptCityState + "</div></span></li></a>");
+      localStorage.setItem("appt"+i+"", JSON.stringify(tempAppt));
+      console.log(localStorage);
+
    } //end for loop
 }; //end landingPageUpdate
 
@@ -95,8 +105,10 @@ $("#apptInfoBox").on("click", function()
    }
 );
 
+// this navigates to the edit appointment page
+
 $(".details-page-footer").on("click", function()
-   {
+{
       console.log("click?");
    $(".landing-page").addClass("off");
    $(".details-page").addClass("off");
@@ -104,6 +116,16 @@ $(".details-page-footer").on("click", function()
    $(".new-appointment-page").addClass("off");
    }
 );
+
+// This takes the tempAppt variable and puts it into local Storage
+
+var returnObject = {};
+
+for(var num = 0; num <= localStorage.length; num++)
+{
+   console.log(JSON.parse(localStorage.getItem('appt'+num+'')));
+};
+
 
 
 }); //end file
