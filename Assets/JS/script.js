@@ -62,7 +62,19 @@ $(".appointment-list").on("click", ".CLICKME", function(e){
   $("#view-appointment-city").text(apptDetail.apptCity);
   $("#view-appointment-state").text(apptDetail.apptState);
   $("#view-appointment-comments").text(apptDetail.apptComments);
-});
+
+
+//this shows the weather for the right location from the wunderground api, but only for RIGHT NOW. no forecasting.
+  $.getJSON("http://api.wunderground.com/api/c5a1b3a2f25bb11e/conditions/q/" + apptDetail.apptState + "/" + apptDetail.apptCity + ".json", function(json)
+  {
+     $('#weather-details').html(json.current_observation.weather);
+     //this gets the current observation weather and puts it in the weather box on the landing page.
+     $('#weather-details').append('<img src = ' + json.current_observation.icon_url + '>'); //gets the icon from wunderground
+     $('#weather-details').append('<p>' + json.current_observation.temp_f + '</p>');
+     $('#weather-details').append('<p>' + json.current_observation.feelslike_f + '</p>');
+  });
+
+});//end of click on specific appointments.
 
 $("#apptDateInput").pickadate();//this uses a js plugin to get the date and time from the user.
 $("#apptTime").pickatime();
@@ -128,16 +140,73 @@ $(".details-page-footer").on("click", function()
    var tempForEditing = JSON.parse(localStorage.getItem("apptMEGL-" + clickedTitle));
    //console.log(tempForEditing);
 
-   $("#edit-appointment-name input").attr("placeholder", tempForEditing.apptTitle);
-   $("#edit-appointment-date input").attr("placeholder", tempForEditing.apptDate);
-   $("#edit-appointment-time input").attr("placeholder", tempForEditing.apptTime);
-   $("#edit-appointment-address input").attr("placeholder", tempForEditing.apptAddress);
-   $("#edit-appointment-city input").attr("placeholder", tempForEditing.apptCity);
-   $("#edit-appointment-state input").attr("placeholder", tempForEditing.apptState);
-   $("#edit-appointment-comments textarea").attr("placeholder", tempForEditing.apptComments);
+   $("#edit-appointment-name input").attr("value", tempForEditing.apptTitle);
+   $("#edit-appointment-date input").attr("value", tempForEditing.apptDate);
+   $("#edit-appointment-time input").attr("value", tempForEditing.apptTime);
+   $("#edit-appointment-address input").attr("value", tempForEditing.apptAddress);
+   $("#edit-appointment-city input").attr("value", tempForEditing.apptCity);
+   $("#edit-appointment-state input").attr("value", tempForEditing.apptState);
+   $("#edit-appointment-comments textarea").attr("value", tempForEditing.apptComments);
 
+   //if, from the edit page, the user just clicks delete instead...
+   $(".delete-appointment-button").on("click", function(){
+     for(var j =0;j<allAppts.length;j++)
+     {
+       if((allAppts[j].apptTitle) === clickedTitle)
+       {
+         allAppts.splice(j,1); //removes this single appt obj from the array.
+       }
+     }
 
-});
+     localStorage.removeItem("apptMEGL-" + clickedTitle);//removes the obj from localstorage.
+
+     $(".landing-page").removeClass("off");
+     $(".details-page").addClass("off");
+     $(".edit-page").addClass("off");
+     $(".new-appointment-page").addClass("off");
+
+     landingPageUpdate();
+
+   });//end the delete click.
+
+   $(".save-edit-button").on("click", function(){
+     //delete the OLD version of this appt from all forms of memory...
+     for(var j =0;j<allAppts.length;j++)
+     {
+       if((allAppts[j].apptTitle) === clickedTitle)
+       {
+         allAppts.splice(j,1); //removes this single appt obj from the array.
+       }
+     }
+     localStorage.removeItem("apptMEGL-" + clickedTitle);
+
+    //now ADD the changed information as if it were a NEW appt.
+    //the reason for this is if the user wants to change the name of the appt, we have to make a brand new one since the name is the key we use in local storage. therefore, we might as well just make a new one every time and delete the old one.
+    //this is litterally copy pasta'd from up above.
+     tempAppt.apptTitle = $("#edit-appointment-name").val();
+     tempAppt.apptDate = $("#edit-appointment-date").val();
+     tempAppt.apptTime = $("#apptTime").val();
+     tempAppt.apptAddress = $("#apptAddressInput").val();
+     tempAppt.apptCity = $("#apptCityInput").val();
+     tempAppt.apptState = $("#apptStateInput").val();
+     tempAppt.apptComments = $("#apptCommentsInput").val();
+
+     localStorage.setItem(("apptMEGL-" + tempAppt.apptTitle), JSON.stringify(tempAppt));//puts tempappt into local storage. we use the prefix "ApptMEGL-" to make sure its an appointment object for OUR app specifically. just in case there are other appointment-like objects in local storage from other websites.
+
+     var temptemp = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle));//this pulls the thing I JUST PUT INTO LOCAL STORAGE into a new variable: temptemp
+
+     allAppts.push(temptemp);//this pushes temptemp into the allappts array.
+
+     $(".landing-page").removeClass("off");
+     $(".details-page").addClass("off");
+     $(".edit-page").addClass("off");
+     $(".new-appointment-page").addClass("off");
+
+     landingPageUpdate();
+
+   });//end save click.
+
+});//end edit page
 
 //========================GREG BELOW===========================================================================MATT ABOVE=================
 
@@ -178,21 +247,6 @@ var today = new Date().toJSON();
 //    // }
 // }
 
-
-$.getJSON("http://api.wunderground.com/api/c5a1b3a2f25bb11e/conditions/q/NC/durham.json", function(json)
-{
-   $('#weather-details').html(json.current_observation.weather);
-   //this gets the current observation weather and puts it in the weather box on the landing page.
-   $('#weather-details').append('<img src = ' + json.current_observation.icon_url + '>'); //gets the icon from wunderground
-   $('#weather-details').append('<p>' + json.current_observation.temp_f + '</p>');
-   $('#weather-details').append('<p>' + json.current_observation.feelslike_f + '</p>');
-});
-
-
-
-
-
-
 // this whole section is to check and see if the appt is after current time
 
 // this gets the time and puts it into an array
@@ -224,57 +278,58 @@ function convertToTimeArray(dateTime)  //Converting JSON date to workable string
 dateTimeArray = convertToTimeArray(todayString); //current time string
 // apptTimeArray = convertToTimeArray(todayString); //time of appt
 
-console.log(dateTimeArray);
-
-var selectedApptTime = {};
-
-var selectedApptTime = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle)).apptTime;
-
-// this turns the string month into a number month
-var selectedApptDate = [];
-var selectedApptDate = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle)).apptDate;
-
-for(var q=0;q<localStorage.length;q++)
-{
-
-   switch(selectedApptDate[q].substring(3,7)){
-      case 'Jan':
-         apptMonth = 01;
-         break;
-      case 'Feb':
-         apptMonth = 02;
-         break;
-      case 'Mar':
-         apptMonth = 03;
-         break;
-      case 'Apr':
-         apptMonth = 04;
-         break;
-      case 'May':
-         apptMonth = 05;
-         break;
-      case 'Jun':
-         apptMonth = 06;
-         break;
-      case 'Jul':
-         apptMonth = 07;
-         break;
-      case 'Aug':
-         apptMonth = 08;
-         break;
-      case 'Sep':
-         apptMonth = 09;
-         break;
-      case 'Oct':
-         apptMonth = 10;
-         break;
-      case 'Nov':
-         apptMonth = 11;
-         break;
-      case 'Dec':
-         apptMonth = 12;
-         break;
-};
+// console.log(dateTimeArray);
+//
+// var selectedApptTime = {};
+//
+// var selectedApptTime = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle)).apptTime;
+//
+// // this turns the string month into a number month
+// var selectedApptDate = [];
+// var selectedApptDate = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle)).apptDate;
+//
+// for(var q=0;q<localStorage.length;q++)
+// {
+//
+//    switch(selectedApptDate[q].substring(3,7)){
+//       case 'Jan':
+//          apptMonth = 01;
+//          break;
+//       case 'Feb':
+//          apptMonth = 02;
+//          break;
+//       case 'Mar':
+//          apptMonth = 03;
+//          break;
+//       case 'Apr':
+//          apptMonth = 04;
+//          break;
+//       case 'May':
+//          apptMonth = 05;
+//          break;
+//       case 'Jun':
+//          apptMonth = 06;
+//          break;
+//       case 'Jul':
+//          apptMonth = 07;
+//          break;
+//       case 'Aug':
+//          apptMonth = 08;
+//          break;
+//       case 'Sep':
+//          apptMonth = 09;
+//          break;
+//       case 'Oct':
+//          apptMonth = 10;
+//          break;
+//       case 'Nov':
+//          apptMonth = 11;
+//          break;
+//       case 'Dec':
+//          apptMonth = 12;
+//          break;
+// };
+// }
 
 for(var q=0;q<localStorage.length;q++)
 {
@@ -285,23 +340,23 @@ for(var q=0;q<localStorage.length;q++)
    }
    var appointmentDay = temptemp.apptDate.substring(0,2);
    var appointmentTime = temptemp.apptTime;
-   var appointmentMonth = temptemp.apptDate.//thsi is wehre I get the month
+   var appointmentMonth = temptemp.apptDate;//thsi is wehre I get the month
    var appointmentYear = temptemp.apptDate.substring();//how do I know it's the last 4?
 
 
 
-      if( >= dateTimeArray[0] && appt month >= dateTimeArray[1] && appointmentDay >= dateTimeArray[2] && appointmentTime < (dateTimeArray[3]-1)) //if appointment time is less than current hours - 1 hour
-      {
-         localStorage.removeItem("apptMEGL-" + tempAppt.apptTitle);
-      };
-};
+//       if( >= dateTimeArray[0] && appt month >= dateTimeArray[1] && appointmentDay >= dateTimeArray[2] && appointmentTime < (dateTimeArray[3]-1)) //if appointment time is less than current hours - 1 hour
+//       {
+//          localStorage.removeItem("apptMEGL-" + tempAppt.apptTitle);
+//       };
+// };
 
 // to delete an appointment
 
-$('.delete-appointment-button')on('click', function())
+$('.delete-appointment-button').on('click', function()
 {
 
-}
+});
 
 
-}); //end file
+}); //end function/file
