@@ -36,7 +36,6 @@ $(".fa-plus").on("click", function()//if user clicks '+' go to add new appointme
    $(".details-page").addClass("off");
    $(".edit-page").addClass("off");
    $(".new-appointment-page").removeClass("off");
-
    }
 );
 
@@ -136,11 +135,10 @@ $(".fa-angle-left").on("click", function()
 
 $("#apptInfoBox").on("click", function()
    {
-      console.log("click?");
-   $(".landing-page").addClass("off");
-   $(".details-page").removeClass("off");
-   $(".edit-page").addClass("off");
-   $(".new-appointment-page").addClass("off");
+      $(".landing-page").addClass("off");
+      $(".details-page").removeClass("off");
+      $(".edit-page").addClass("off");
+      $(".new-appointment-page").addClass("off");
    }
 );
 
@@ -153,7 +151,7 @@ $(".details-page-footer").on("click", function()
    $(".details-page").addClass("off");
    $(".edit-page").removeClass("off");
    $(".new-appointment-page").addClass("off");
-   }
+}
 );
 
 // This takes the item in local Storage and puts it into an object that we can manipulate
@@ -180,14 +178,23 @@ var today = new Date().toJSON();
 //    //
 //    // }
 // }
+
+
 $.getJSON("http://api.wunderground.com/api/c5a1b3a2f25bb11e/conditions/q/NC/durham.json", function(json)
 {
-   $('#weather-information').html(json.current_observation.weather);
+   $('#weather-details').html(json.current_observation.weather);
    //this gets the current observation weather and puts it in the weather box on the landing page.
-   $('#weather-information').html(json.current_observation.icon_url); //gets the icon from wunderground
-   $('#weather-information').html(json.current_observation.temp_f);
-   $('#weather-information').html(json.current_observation.feelslike_f);
+   $('#weather-details').append('<img src = ' + json.current_observation.icon_url + '>'); //gets the icon from wunderground
+   $('#weather-details').append('<p>' + json.current_observation.temp_f + '</p>');
+   $('#weather-details').append('<p>' + json.current_observation.feelslike_f + '</p>');
 });
+
+
+
+
+
+
+// this whole section is to check and see if the appt is after current time
 
 // this gets the time and puts it into an array
 
@@ -220,13 +227,82 @@ dateTimeArray = convertToTimeArray(todayString); //current time string
 
 console.log(dateTimeArray);
 
+var selectedApptTime = {};
 
-var hideItem = function ()
+var selectedApptTime = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle)).apptTime;
+
+// this turns the string month into a number month
+var selectedApptDate = [];
+var selectedApptDate = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle)).apptDate;
+
+for(var q=0;q<localStorage.length;q++)
 {
-   if( (dateTimeArray[3]-1))
-   {
 
-   };
+   switch(selectedApptDate[q].substring(3,7)){
+      case 'Jan':
+         apptMonth = 01;
+         break;
+      case 'Feb':
+         apptMonth = 02;
+         break;
+      case 'Mar':
+         apptMonth = 03;
+         break;
+      case 'Apr':
+         apptMonth = 04;
+         break;
+      case 'May':
+         apptMonth = 05;
+         break;
+      case 'Jun':
+         apptMonth = 06;
+         break;
+      case 'Jul':
+         apptMonth = 07;
+         break;
+      case 'Aug':
+         apptMonth = 08;
+         break;
+      case 'Sep':
+         apptMonth = 09;
+         break;
+      case 'Oct':
+         apptMonth = 10;
+         break;
+      case 'Nov':
+         apptMonth = 11;
+         break;
+      case 'Dec':
+         apptMonth = 12;
+         break;
 };
+
+for(var q=0;q<localStorage.length;q++)
+{
+   var keyname = localStorage.key(q); //this gets the length of local storage
+   var temptemp = JSON.parse(localStorage.getItem(keyname));//this parses all the items in local storage, puts them into temptemp
+
+
+   }
+   var appointmentDay = temptemp.apptDate.substring(0,2);
+   var appointmentTime = temptemp.apptTime;
+   var appointmentMonth = temptemp.apptDate.//thsi is wehre I get the month
+   var appointmentYear = temptemp.apptDate.substring();//how do I know it's the last 4?
+
+
+
+      if( >= dateTimeArray[0] && appt month >= dateTimeArray[1] && appointmentDay >= dateTimeArray[2] && appointmentTime < (dateTimeArray[3]-1)) //if appointment time is less than current hours - 1 hour
+      {
+         localStorage.removeItem("apptMEGL-" + tempAppt.apptTitle);
+      };
+};
+
+// to delete an appointment
+
+$('.delete-appointment-button')on('click', function())
+{
+
+}
+
 
 }); //end file
