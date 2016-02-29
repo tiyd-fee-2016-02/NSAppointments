@@ -161,10 +161,44 @@ $.getJSON("http://api.wunderground.com/api/c5a1b3a2f25bb11e/conditions/q/NC/durh
    $('#weather-information').html(json.current_observation.feelslike_f);
 });
 
-// this sanitizes our city and state inputs, so we can effectively use the API
-// if()
-//  {
-//
-// };
+// this gets the time and puts it into an array
+
+var today = new Date; //today's date
+var todayString = today.toJSON(); //today's date in a string
+var dateTimeArray = []; //an array for today's date
+
+var apptTime;
+
+
+
+
+function convertToTimeArray(dateTime)  //Converting JSON date to workable strings.
+{
+  var dateTimeArray = [];
+  dateTimeArray.push(dateTime.substr(0, 4));  //[0] year
+  dateTimeArray.push(dateTime.substr(5, 2));  //[1] month
+  dateTimeArray.push(dateTime.substr(8, 2));  //[2] day
+  dateTimeArray.push(dateTime.substr(11, 2));  //[3] hour
+  dateTimeArray.push(dateTime.substr(14, 2));  //[4] minute
+  dateTimeArray.push(dateTime.substr(17, 2));  //[5] second
+  return dateTimeArray;
+};
+
+
+// allAppts.apptTime.toJSON();
+
+dateTimeArray = convertToTimeArray(todayString); //current time string
+// apptTimeArray = convertToTimeArray(todayString); //time of appt
+
+console.log(dateTimeArray);
+
+
+var hideItem = function ()
+{
+   if( (dateTimeArray[3]-1))
+   {
+
+   };
+};
 
 }); //end file
