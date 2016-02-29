@@ -176,20 +176,6 @@ $(".details-page-footer").on("click", function()
    //if user clicks the Save edits button.
    $(".save-edit-button").on("click", function(){
 
-     tempForEditing.apptTitle = $("#editApptName").val();
-     tempForEditing.apptDate = $("#editApptDate").val();
-     tempForEditing.apptTime = $("#editApptTime").val();
-     tempForEditing.apptAddress = $("#editApptAddress").val();
-     tempForEditing.apptCity = $("#editApptCity").val();
-     tempForEditing.apptState = $("#editApptState").val();
-     tempForEditing.apptComments = $("#editApptComments").val();
-
-     localStorage.setItem(("apptMEGL-" + tempAppt.apptTitle), JSON.stringify(tempForEditing));//puts tempappt into local storage. we use the prefix "ApptMEGL-" to make sure its an appointment object for OUR app specifically. just in case there are other appointment-like objects in local storage from other websites.
-
-     var temptemp = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle));//this pulls the thing I JUST PUT INTO LOCAL STORAGE into a new variable: temptemp
-
-     allAppts.push(temptemp);//this pushes temptemp into the allappts array.
-
      //delete the OLD version of this appt from all forms of memory...
      for(var j =0;j<allAppts.length;j++)
      {
@@ -203,6 +189,20 @@ $(".details-page-footer").on("click", function()
     //now ADD the changed information as if it were a NEW appt.
     //the reason for this is if the user wants to change the name of the appt, we have to make a brand new one since the name is the key we use in local storage. therefore, we might as well just make a new one every time and delete the old one.
     //this is litterally copy pasta'd from up above.
+
+     tempForEditing.apptTitle = $("#editApptName").val();
+     tempForEditing.apptDate = $("#editApptDate").val();
+     tempForEditing.apptTime = $("#editApptTime").val();
+     tempForEditing.apptAddress = $("#editApptAddress").val();
+     tempForEditing.apptCity = $("#editApptCity").val();
+     tempForEditing.apptState = $("#editApptState").val();
+     tempForEditing.apptComments = $("#editApptComments").val();
+
+     localStorage.setItem(("apptMEGL-" + tempForEditing.apptTitle), JSON.stringify(tempForEditing));//puts tempappt into local storage. we use the prefix "ApptMEGL-" to make sure its an appointment object for OUR app specifically. just in case there are other appointment-like objects in local storage from other websites.
+
+     var temptemp = JSON.parse(localStorage.getItem("apptMEGL-" + tempForEditing.apptTitle));//this pulls the thing I JUST PUT INTO LOCAL STORAGE into a new variable: temptemp
+
+     allAppts.push(temptemp);//this pushes temptemp into the allappts array.
 
      $(".landing-page").removeClass("off");
      $(".details-page").addClass("off");
