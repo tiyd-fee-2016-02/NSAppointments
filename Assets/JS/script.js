@@ -18,24 +18,23 @@ function Appointment(apptTitle, apptAddress, apptCity, apptState, apptDate, appt
 //this section of code pulls all the appointments from localStorage and puts them in allAppts.
 var allAppts= [];
 //this code is mostly copy pasta'd from the WORKING code below.
-for(var p=0;p<=localStorage.length-1;p++)
+for(var p=0;p<localStorage.length;p++)
 {
   var keyname = localStorage.key(p);
   var temptemp = JSON.parse(localStorage.getItem(keyname));//this pulls the thing I JUST PUT INTO LOCAL STORAGE into a new variable: temptemp
   allAppts.push(temptemp);//this pushes temptemp into the allappts array.
 }
-landingPageUpdate();
+landingPageUpdate();//updates the landing page with the localstorage appts.
 
 
 
 
 $(".fa-plus").on("click", function()//if user clicks '+' go to add new appointment page.
    {
-      console.log("click?");
-   $(".landing-page").addClass("off");
-   $(".details-page").addClass("off");
-   $(".edit-page").addClass("off");
-   $(".new-appointment-page").removeClass("off");
+     $(".landing-page").addClass("off");
+     $(".details-page").addClass("off");
+     $(".edit-page").addClass("off");
+     $(".new-appointment-page").removeClass("off");
    }
 );
 
@@ -52,17 +51,17 @@ $(".appointment-list").on("click", ".CLICKME", function(e){
   $(".edit-page").addClass("off");
   $(".new-appointment-page").addClass("off");
 
-  //since FOR SOME REASON the allAppts array isnt working. FUCK. we just grab info about the appt you clicked on directly from local storage.
+  //since FOR SOME REASON the allAppts array isnt working. what the FLIP?!. we just grab info about the appt you clicked on directly from local storage.
   var apptDetail = JSON.parse(localStorage.getItem("apptMEGL-" + clickedTitle));
 
+
   $("#view-appointment-name").text(apptDetail.apptTitle);
+  $("#view-appointment-date").text(apptDetail.apptDate);
   $("#view-appointment-time").text(apptDetail.apptTime);
   $("#view-appointment-address").text(apptDetail.apptAddress);
   $("#view-appointment-city").text(apptDetail.apptCity);
   $("#view-appointment-state").text(apptDetail.apptState);
-  $("#view-appointment-comment").text(apptDetail.apptComments);
-
-
+  $("#view-appointment-comments").text(apptDetail.apptComments);
 });
 
 $("#apptDateInput").pickadate();//this uses a js plugin to get the date and time from the user.
@@ -110,12 +109,35 @@ function landingPageUpdate()
    $(".appointment-list").html(" ");//clears the current appointments on the landing page.
    for(var i = 0; i < allAppts.length; i++)
    {
-      $(".appointment-list").append("<a href='#' class='CLICKME' id='" + allAppts[i].apptTitle + "'><li id='apptContainer' class = 'NSAppointment'><span id = 'weather-box'class = 'appointment-information off'><div id = 'appointment-time' class = 'appointment-information'>" + allAppts[i].apptTime + "</div><div id = 'weather-information' class = 'appointment-information'>" + "</i></div></span><span id ='apptInfoBox' class='off'><div id = 'appointment-title' class = 'appointment-information'>" + allAppts[i].apptTitle + "</div><div id = 'appointment-address' class = 'appointment-information'>" + allAppts[i].apptAddress + "</div><div id = 'appointment-city' class = 'appointment-information'>@" + allAppts[i].apptCity + ", " + allAppts[i].apptState + "</div></span></li></a>");
+      $(".appointment-list").append("<a href='#' class='CLICKME' id='" + allAppts[i].apptTitle + "'><li id='apptContainer' class = 'NSAppointment'><span id = 'weather-box'class = 'appointment-information off'><div id = 'appointment-time' class = 'appointment-information'>" + allAppts[i].apptTime + "</div><div id = 'weather-information' class = 'appointment-information'><i class='fa fa-cloud fa-3x'></i></i></div></span><span id ='apptInfoBox' class='off'><div id = 'appointment-title' class = 'appointment-information'>" + allAppts[i].apptTitle + "</div><div id = 'appointment-address' class = 'appointment-information'>" + allAppts[i].apptAddress + "</div><div id = 'appointment-city' class = 'appointment-information'>@" + allAppts[i].apptCity + ", " + allAppts[i].apptState + "</div></span></li></a>");
       // localStorage.setItem("appt"+i+"", JSON.stringify(tempAppt));
       //console.log(localStorage);
 
    } //end for loop
 }; //end landingPageUpdate
+
+// user clicks on edit appt from appt details page: navigates to the edit appointment page
+$(".details-page-footer").on("click", function()
+{
+   $(".landing-page").addClass("off");
+   $(".details-page").addClass("off");
+   $(".edit-page").removeClass("off");
+   $(".new-appointment-page").addClass("off");
+
+   //console.log(clickedTitle);
+   var tempForEditing = JSON.parse(localStorage.getItem("apptMEGL-" + clickedTitle));
+   //console.log(tempForEditing);
+
+   $("#edit-appointment-name input").attr("placeholder", tempForEditing.apptTitle);
+   $("#edit-appointment-date input").attr("placeholder", tempForEditing.apptDate);
+   $("#edit-appointment-time input").attr("placeholder", tempForEditing.apptTime);
+   $("#edit-appointment-address input").attr("placeholder", tempForEditing.apptAddress);
+   $("#edit-appointment-city input").attr("placeholder", tempForEditing.apptCity);
+   $("#edit-appointment-state input").attr("placeholder", tempForEditing.apptState);
+   $("#edit-appointment-comments textarea").attr("placeholder", tempForEditing.apptComments);
+
+
+});
 
 //========================GREG BELOW===========================================================================MATT ABOVE=================
 
@@ -129,29 +151,6 @@ $(".fa-angle-left").on("click", function()
    $(".edit-page").addClass("off");
    $(".new-appointment-page").addClass("off");
    }
-);
-
-// this navigates to edit page from landing page
-
-$("#apptInfoBox").on("click", function()
-   {
-      $(".landing-page").addClass("off");
-      $(".details-page").removeClass("off");
-      $(".edit-page").addClass("off");
-      $(".new-appointment-page").addClass("off");
-   }
-);
-
-// this navigates to the edit appointment page
-
-$(".details-page-footer").on("click", function()
-{
-      console.log("click?");
-   $(".landing-page").addClass("off");
-   $(".details-page").addClass("off");
-   $(".edit-page").removeClass("off");
-   $(".new-appointment-page").addClass("off");
-}
 );
 
 // This takes the item in local Storage and puts it into an object that we can manipulate
