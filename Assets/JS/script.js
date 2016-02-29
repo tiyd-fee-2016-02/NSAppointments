@@ -179,6 +179,7 @@ var today = new Date().toJSON();
 // }
 
 
+
 $.getJSON("http://api.wunderground.com/api/c5a1b3a2f25bb11e/conditions/q/NC/durham.json", function(json)
 {
    $('#weather-details').html(json.current_observation.weather);
