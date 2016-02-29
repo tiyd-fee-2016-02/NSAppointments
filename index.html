@@ -16,7 +16,7 @@
 <body>
    <div class = "whole-page">
 <!--  ******   this is the html for the main page  ******** -->
-      <div class = "landing-page off">
+      <div class = "landing-page">
          <header class = "landing-page">
             <h2 class = "landing-page-title">NSAppointments <i class="fa fa-plus"></i></h2>
 
@@ -126,7 +126,7 @@
 
 <!--     ******   this is the html for the details page   ******    -->
 
-      <div class = "details-page">
+      <div class = "details-page off">
          <header class = "details-page-header">
             <i class="fa fa-angle-left"></i>
 <!-- this is where the appointment Name goes -->
@@ -157,7 +157,7 @@
 <!-- these are the same feilds as for the original form, but we need to pass in the information already submitted as a placeholder or some other thing for the user to see/modify -->
             <span id = "edit-appointment-name" class = "edit-appointment-input">
                <label>NSAppointment Name</label>
-               <input type = "text">
+               <input id="editApptName" type = "text">
             </span>
             <span id = "edit-appointment-date" class = "edit-appointment-input">
                <label>NSAppointment Date</label>
@@ -169,19 +169,19 @@
             </span>
             <span id = "edit-appointment-address" class = "edit-appointment-input">
                <label>NSAppointment Address</location>
-               <input type = "test">
+               <input id="editApptAddress" type = "test">
             </span>
             <span id = "edit-appointment-city" class = "edit-appointment-input">
-               <label>NSAppointment City/State</location>
-               <input type = "test">
+               <label>NSAppointment City</location>
+               <input id="editApptCity" type = "test">
             </span>
             <span id = "edit-appointment-state" class = "edit-appointment-input">
-               <label>NSAppointment City/State</location>
-               <input type = "test">
+               <label>NSAppointment State</location>
+               <input id="editApptState" type = "test">
             </span>
             <span id = "edit-appointment-comments" class = "edit-appointment-input">
                <label>NSAppointment Comments</label>
-               <textarea></textarea>
+               <textarea id="editApptComments"></textarea>
             </span>
          </form>
          <footer class = "edit-page-footer">

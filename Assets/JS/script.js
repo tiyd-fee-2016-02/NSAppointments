@@ -23,6 +23,7 @@ for(var p=0;p<localStorage.length;p++)
   var keyname = localStorage.key(p);
   var temptemp = JSON.parse(localStorage.getItem(keyname));//this pulls the thing I JUST PUT INTO LOCAL STORAGE into a new variable: temptemp
   allAppts.push(temptemp);//this pushes temptemp into the allappts array.
+  console.log(allAppts[p]);
 }
 landingPageUpdate();//updates the landing page with the localstorage appts.
 
@@ -125,10 +126,9 @@ function landingPageUpdate()
    $(".appointment-list").html(" ");//clears the current appointments on the landing page.
    for(var i = 0; i < allAppts.length; i++)
    {
-      $(".appointment-list").append("<a href='#' class='CLICKME' id='" + allAppts[i].apptTitle + "'><li id='apptContainer' class = 'NSAppointment'><span id = 'weather-box'class = 'appointment-information off'><div id = 'appointment-time' class = 'appointment-information'>" + allAppts[i].apptTime + "</div><div id = 'weather-information' class = 'appointment-information'><i class='fa fa-cloud fa-3x'></i></i></div></span><span id ='apptInfoBox' class='off'><div id = 'appointment-title' class = 'appointment-information'>" + allAppts[i].apptTitle + "</div><div id = 'appointment-address' class = 'appointment-information'>" + allAppts[i].apptAddress + "</div><div id = 'appointment-city' class = 'appointment-information'>@" + allAppts[i].apptCity + ", " + allAppts[i].apptState + "</div></span></li></a>");
+      $(".appointment-list").append("<a href='#' class='CLICKME' id='" + allAppts[i].apptTitle + "'><li id='apptContainer' class = 'NSAppointment'><span id = 'weather-box'class = 'appointment-information off'><div id = 'appointment-time' class = 'appointment-information'>" + allAppts[i].apptTime + "</div><div id = 'weather-information' class = 'appointment-information'><i class='fa fa-cloud fa-3x'></i></div></span><span id ='apptInfoBox' class='off'><div id = 'appointment-title' class = 'appointment-information'>" + allAppts[i].apptTitle + "</div><div id = 'appointment-address' class = 'appointment-information'>" + allAppts[i].apptAddress + "</div><div id = 'appointment-city' class = 'appointment-information'>@" + allAppts[i].apptCity + ", " + allAppts[i].apptState + "</div></span></li></a>");
       // localStorage.setItem("appt"+i+"", JSON.stringify(tempAppt));
-      //console.log(localStorage);
-
+      //console.log(localStorage)
    } //end for loop
 }; //end landingPageUpdate
 
@@ -173,7 +173,23 @@ $(".details-page-footer").on("click", function()
 
    });//end the delete click.
 
+   //if user clicks the Save edits button.
    $(".save-edit-button").on("click", function(){
+
+     tempForEditing.apptTitle = $("#editApptName").val();
+     tempForEditing.apptDate = $("#editApptDate").val();
+     tempForEditing.apptTime = $("#editApptTime").val();
+     tempForEditing.apptAddress = $("#editApptAddress").val();
+     tempForEditing.apptCity = $("#editApptCity").val();
+     tempForEditing.apptState = $("#editApptState").val();
+     tempForEditing.apptComments = $("#editApptComments").val();
+
+     localStorage.setItem(("apptMEGL-" + tempAppt.apptTitle), JSON.stringify(tempForEditing));//puts tempappt into local storage. we use the prefix "ApptMEGL-" to make sure its an appointment object for OUR app specifically. just in case there are other appointment-like objects in local storage from other websites.
+
+     var temptemp = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle));//this pulls the thing I JUST PUT INTO LOCAL STORAGE into a new variable: temptemp
+
+     allAppts.push(temptemp);//this pushes temptemp into the allappts array.
+
      //delete the OLD version of this appt from all forms of memory...
      for(var j =0;j<allAppts.length;j++)
      {
@@ -187,19 +203,6 @@ $(".details-page-footer").on("click", function()
     //now ADD the changed information as if it were a NEW appt.
     //the reason for this is if the user wants to change the name of the appt, we have to make a brand new one since the name is the key we use in local storage. therefore, we might as well just make a new one every time and delete the old one.
     //this is litterally copy pasta'd from up above.
-     tempAppt.apptTitle = $("#edit-appointment-name").val();
-     tempAppt.apptDate = $("#edit-appointment-date").val();
-     tempAppt.apptTime = $("#apptTime").val();
-     tempAppt.apptAddress = $("#apptAddressInput").val();
-     tempAppt.apptCity = $("#apptCityInput").val();
-     tempAppt.apptState = $("#apptStateInput").val();
-     tempAppt.apptComments = $("#apptCommentsInput").val();
-
-     localStorage.setItem(("apptMEGL-" + tempAppt.apptTitle), JSON.stringify(tempAppt));//puts tempappt into local storage. we use the prefix "ApptMEGL-" to make sure its an appointment object for OUR app specifically. just in case there are other appointment-like objects in local storage from other websites.
-
-     var temptemp = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle));//this pulls the thing I JUST PUT INTO LOCAL STORAGE into a new variable: temptemp
-
-     allAppts.push(temptemp);//this pushes temptemp into the allappts array.
 
      $(".landing-page").removeClass("off");
      $(".details-page").addClass("off");
@@ -218,6 +221,7 @@ $(".details-page-footer").on("click", function()
 
 $(".fa-angle-left").on("click", function()
    {
+     landingPageUpdate();
       console.log("click?");
    $(".landing-page").removeClass("off");
    $(".details-page").addClass("off");
