@@ -62,10 +62,23 @@ $(".appointment-list").on("click", ".CLICKME", function(e){
   $("#view-appointment-city").text(apptDetail.apptCity);
   $("#view-appointment-state").text(apptDetail.apptState);
   $("#view-appointment-comments").text(apptDetail.apptComments);
+
+
+  $.getJSON("http://api.wunderground.com/api/c5a1b3a2f25bb11e/conditions/q/" + apptDetail.apptState + "/" + apptDetail.apptCity + ".json", function(json)
+  {
+     $('#weather-details').html(json.current_observation.weather);
+     //this gets the current observation weather and puts it in the weather box on the landing page.
+     $('#weather-details').append("<img src ='"+json.current_observation.icon_url+"'>"); //gets the icon from wunderground
+     $('#weather-details').append('<p>' + json.current_observation.temp_f + '</p>');
+     $('#weather-details').append('<p>' + json.current_observation.feelslike_f + '</p>');
+  });
+
 });
 
-$("#apptDateInput").pickadate();//this uses a js plugin to get the date and time from the user.
+$("#apptDateInput").pickadate();
+$("#editApptTime").pickadate();//this uses a js plugin to get the date and time from the user.
 $("#apptTime").pickatime();
+$("#editApptTime").pickatime();
 
 
 var tempAppt = new Appointment();
