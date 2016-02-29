@@ -23,11 +23,9 @@ for(var p=0;p<localStorage.length;p++)
   var keyname = localStorage.key(p);
   var temptemp = JSON.parse(localStorage.getItem(keyname));//this pulls the thing I JUST PUT INTO LOCAL STORAGE into a new variable: temptemp
   allAppts.push(temptemp);//this pushes temptemp into the allappts array.
-  console.log(allAppts[p]);
+  //console.log(allAppts[p]);
 }
 landingPageUpdate();//updates the landing page with the localstorage appts.
-
-
 
 
 $(".fa-plus").on("click", function()//if user clicks '+' go to add new appointment page.
@@ -80,7 +78,7 @@ $(".appointment-list").on("click", ".CLICKME", function(e){
 });//end of click on specific appointments.
 
 $("#apptDateInput").pickadate();
-$("#editApptTime").pickadate();//this uses a js plugin to get the date and time from the user.
+$("#editApptDate").pickadate();//this uses a js plugin to get the date and time from the user.
 $("#apptTime").pickatime();
 $("#editApptTime").pickatime();
 
@@ -215,7 +213,7 @@ $(".details-page-footer").on("click", function()
 
 });//end edit page
 
-//========================GREG BELOW===========================================================================MATT ABOVE=================
+//====================================================================================================================
 
 // This navigates back to the landing page from the new appointment page and the edit page
 
