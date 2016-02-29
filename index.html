@@ -23,24 +23,7 @@
          </header>
          <textarea id="apptSearchBar"></textarea><i class="fa fa-search"></i>
          <ul class = "appointment-list">
-                    <a href="#">
-                      <li id= "apptContainer" class = "NSAppointment">
-          <!-- the date is 'invisible', events are sorted by 'today', which are presented first, and lines between each day are present to show the time scale -->
-                        <!-- we need to get the weather from the wunderground API -->
-                        <span id = "weather-box" class = "appointment-information off">
-                            <!-- we need to get these six items from our localstorage -->
-                           <div id = "appointment-time" class = "appointment-information">8:00 PM</div>
-                           <div id = "weather-information" class = "appointment-information">
-                              <i class="fa fa-cloud fa-3x"></i>
-                           </div>
-                        </span>
-                        <span id ="apptInfoBox" class="off">
-                            <div id = "appointment-title" class = "appointment-information">Dinner with Mom</div>
-                            <div id = "appointment-address" class = "appointment-information">@ 404 smartypants ln.</div>
-                            <div id = "appointment-city-state" class = "appointment-information">&nbsp;&nbsp;&nbsp;&nbsp;raleigh, nc.</div>
-                        </span>
-                      </li>
-                    </a><!--end one appointment-->
+
    <!-- add li's like a boss here for getting that sweet appointment information -->
          </ul>
       </div>
@@ -153,7 +136,8 @@
             <h5 id = "view-appointment-date"class = "appointment-details">appt date</h5>
             <h5 id = "view-appointment-time" class = "appointment-details">appt time</h5>
             <h6 id = "view-appointment-address" class = "appointment-details">appt address</h6>
-            <h6 id = "view-appointment-city-state" class = "appointment-details">appt city and state</h6>
+            <h6 id = "view-appointment-city" class = "appointment-details">appt city</h6>
+            <h6 id = "view-appointment-state" class = "appointment-details">appt state</h6>
             <p id = "view-appointment-comments" class = "appointment-details">appt comments</p>
             <span id = "weather-details" class = "appointment-details">weather insert here</span>
          </section>
