@@ -64,20 +64,24 @@ $(".appointment-list").on("click", ".CLICKME", function(e){
   $("#view-appointment-comments").text(apptDetail.apptComments);
 
 
+
 //this shows the weather for the right location from the wunderground api, but only for RIGHT NOW. no forecasting.
   $.getJSON("http://api.wunderground.com/api/c5a1b3a2f25bb11e/conditions/q/" + apptDetail.apptState + "/" + apptDetail.apptCity + ".json", function(json)
   {
      $('#weather-details').html(json.current_observation.weather);
      //this gets the current observation weather and puts it in the weather box on the landing page.
-     $('#weather-details').append('<img src = ' + json.current_observation.icon_url + '>'); //gets the icon from wunderground
+
+     $('#weather-details').append("<img src ='"+json.current_observation.icon_url+"'>"); //gets the icon from wunderground
      $('#weather-details').append('<p>' + json.current_observation.temp_f + '</p>');
      $('#weather-details').append('<p>' + json.current_observation.feelslike_f + '</p>');
   });
 
 });//end of click on specific appointments.
 
-$("#apptDateInput").pickadate();//this uses a js plugin to get the date and time from the user.
+$("#apptDateInput").pickadate();
+$("#editApptTime").pickadate();//this uses a js plugin to get the date and time from the user.
 $("#apptTime").pickatime();
+$("#editApptTime").pickatime();
 
 
 var tempAppt = new Appointment();
@@ -278,6 +282,7 @@ function convertToTimeArray(dateTime)  //Converting JSON date to workable string
 dateTimeArray = convertToTimeArray(todayString); //current time string
 // apptTimeArray = convertToTimeArray(todayString); //time of appt
 
+
 // console.log(dateTimeArray);
 //
 // var selectedApptTime = {};
@@ -288,6 +293,7 @@ dateTimeArray = convertToTimeArray(todayString); //current time string
 // var selectedApptDate = [];
 // var selectedApptDate = JSON.parse(localStorage.getItem("apptMEGL-" + tempAppt.apptTitle)).apptDate;
 //
+
 // for(var q=0;q<localStorage.length;q++)
 // {
 //
@@ -331,19 +337,21 @@ dateTimeArray = convertToTimeArray(todayString); //current time string
 // };
 // }
 
-for(var q=0;q<localStorage.length;q++)
-{
-   var keyname = localStorage.key(q); //this gets the length of local storage
-   var temptemp = JSON.parse(localStorage.getItem(keyname));//this parses all the items in local storage, puts them into temptemp
 
-
-   }
-   var appointmentDay = temptemp.apptDate.substring(0,2);
-   var appointmentTime = temptemp.apptTime;
-   var appointmentMonth = temptemp.apptDate;//thsi is wehre I get the month
-   var appointmentYear = temptemp.apptDate.substring();//how do I know it's the last 4?
-
-
+// for(var q=0;q<localStorage.length;q++)
+// {
+//    var keyname = localStorage.key(q); //this gets the length of local storage
+//    var temptemp = JSON.parse(localStorage.getItem(keyname));//this parses all the items in local storage, puts them into temptemp
+//
+//
+//    }
+//    var appointmentDay = temptemp.apptDate.substring(0,2);
+//    var appointmentTime = temptemp.apptTime;
+//    var appointmentMonth = temptemp.apptDate.//thsi is wehre I get the month
+//    var appointmentYear = temptemp.apptDate.substring();//how do I know it's the last 4?
+//
+//
+//
 
 //       if( >= dateTimeArray[0] && appt month >= dateTimeArray[1] && appointmentDay >= dateTimeArray[2] && appointmentTime < (dateTimeArray[3]-1)) //if appointment time is less than current hours - 1 hour
 //       {
@@ -351,12 +359,6 @@ for(var q=0;q<localStorage.length;q++)
 //       };
 // };
 
-// to delete an appointment
-
-$('.delete-appointment-button').on('click', function()
-{
-
-});
 
 
 }); //end function/file
