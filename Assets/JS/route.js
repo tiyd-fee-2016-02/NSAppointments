@@ -10,9 +10,15 @@ routeApp.config(function($routeProvider){
       .when('/NewAppointmentPage',{
          templateUrl: 'new-appointment-page.html'
       })
-      // .when('landing-page',{
-      //    templateUrl: 'landing-page.html',
-      // })
+      .when('#/',{
+         templateUrl: 'landing-page.html',
+      })
+      .when('/DetailsPage',{
+         templateUrl: 'details-page.html',
+      })
+      .when('/edit-page',{
+         templateUrl: 'edit-page.html'
+      })
 
 });
    //
