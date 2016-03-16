@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="routeApp">
 <head>
    <link href='https://fonts.googleapis.com/css?family=Pompiere' rel='stylesheet' type='text/css'>
    <link href='https://fonts.googleapis.com/css?family=Tulpen+One' rel='stylesheet' type='text/css'>
@@ -9,188 +9,11 @@
    <link rel="stylesheet" href ="Assets/JS/pickadate.js-3.5.6/lib/themes/default.time.css">
    <link rel="stylesheet" href ="Assets/JS/pickadate.js-3.5.6/lib/themes/default.date.css">
    <link href = "Assets/CSS/styles.css" rel = "stylesheet">
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
 
    <title>NSAppointments</title>
-</head>
-
-<body>
-   <div class = "whole-page">
-<!--  ******   this is the html for the main landing page  ******** -->
-      <div class = "landing-page">
-         <header class = "landing-page">
-            <h2 class = "landing-page-title">NSAppointments <i class="fa fa-plus"></i></h2>
-
-         </header>
-         <textarea id="apptSearchBar"></textarea><i class="fa fa-search"></i>
-         <ul class = "appointment-list">
-
-   <!-- add li's like a boss here for getting that sweet appointment information -->
-         </ul>
-      </div>
-
-<!--  ***** this is the html for the new appointment page ***** -->
-
-      <div class = "new-appointment-page off">
-         <header class = "new-appointment-page-header">
-            <i class="fa fa-angle-left"></i>
-            <h2>New NSAppointment</h2>
-         </header>
-         <form class = "new-appointment-form">
-            <span class = "new-appointment-input">
-               <label>NSAppointment Name</label>
-               <input id = "apptNameInput" type = "text">
-            </span>
-            <span class = "forborder"></span>
-            <span class = "new-appointment-input">
-               <label>NSAppointment Date</label>
-               <input id = "apptDateInput" type = "text">
-            </span>
-            <span class = "new-appointment-input">
-               <label>NSAppointment Time</label>
-               <input id = "apptTime" type = "text">
-            </span>
-            <span class = "forborder"></span>
-            <span class = "new-appointment-input">
-               <label>NSAppointment Address</location>
-               <input id = "apptAddressInput" type = "text">
-            </span>
-            <span class = "new-appointment-input">
-               <label>NSAppointment City</location>
-               <input id = "apptCityInput" type = "text">
-            </span>
-            <span class = "forborder"></span>
-            <span id = "stateDropDown" class = "new-appointment-input">
-               <label>NSAppointment State</label><br>
-               <select id = "apptStateInput" class = "new-appointment-input">
-                  <option value = "AL">AL</option>
-                  <option value = "AK">AK</option>
-                  <option value = "AZ">AZ</option>
-                  <option value = "AR">AR</option>
-                  <option value = "CA">CA</option>
-                  <option value = "CO">CO</option>
-                  <option value = "CT">CT</option>
-                  <option value = "DE">DE</option>
-                  <option value = "FL">FL</option>
-                  <option value = "GA">GA</option>
-                  <option value = "HI">HI</option>
-                  <option value = "ID">ID</option>
-                  <option value = "IL">IL</option>
-                  <option value = "IN">IN</option>
-                  <option value = "IA">IA</option>
-                  <option value = "KS">KS</option>
-                  <option value = "KY">KY</option>
-                  <option value = "LA">LA</option>
-                  <option value = "ME">ME</option>
-                  <option value = "MD">MD</option>
-                  <option value = "MA">MA</option>
-                  <option value = "MI">MI</option>
-                  <option value = "MN">MN</option>
-                  <option value = "MS">MS</option>
-                  <option value = "MO">MO</option>
-                  <option value = "MT">MT</option>
-                  <option value = "NE">NE</option>
-                  <option value = "NV">NV</option>
-                  <option value = "NH">NH</option>
-                  <option value = "NJ">NJ</option>
-                  <option value = "NM">NM</option>
-                  <option value = "NY">NY</option>
-                  <option value = "NC">NC</option>
-                  <option value = "ND">ND</option>
-                  <option value = "OH">OH</option>
-                  <option value = "OK">OK</option>
-                  <option value = "OR">OR</option>
-                  <option value = "PA">PA</option>
-                  <option value = "RI">RI</option>
-                  <option value = "SC">SC</option>
-                  <option value = "SD">SD</option>
-                  <option value = "TN">TN</option>
-                  <option value = "TX">TX</option>
-                  <option value = "UT">UT</option>
-                  <option value = "VT">VT</option>
-                  <option value = "VA">VA</option>
-                  <option value = "WA">WA</option>
-                  <option value = "WV">WV</option>
-                  <option value = "WI">WI</option>
-                  <option value = "WY">WY</option>
-                  <option value = "DC">DC</option>
-               </select><br>
-            </span><br>
-            <span id = "commentInput" class = "new-appointment-input">
-               <label>NSAppointment Comments</label>
-               <textarea id = "apptCommentsInput"></textarea>
-            </span>
-            <button id = "appointment-submit" type = "submit">Give us your Itinerary</button>
-         </form>
-
-      </div>
-
-<!--     ******   this is the html for the details page   ******    -->
-
-      <div class = "details-page off">
-         <header class = "details-page-header">
-            <i class="fa fa-angle-left"></i>
-<!-- this is where the appointment Name goes -->
-            <h5 id = "view-appointment-name" class = "appointment-details">Appointment name</h5>
-         </header>
-         <section class = "details-page-section">
-            <h5 id = "view-appointment-date"class = "appointment-details">appt date</h5>
-            <h5 id = "view-appointment-time" class = "appointment-details">appt time</h5>
-            <h6 id = "view-appointment-address" class = "appointment-details">appt address</h6>
-            <h6 id = "view-appointment-city" class = "appointment-details">appt city</h6>
-            <h6 id = "view-appointment-state" class = "appointment-details">appt state</h6>
-            <p id = "view-appointment-comments" class = "appointment-details">appt comments</p>
-            <span id = "weather-details" class = "appointment-details"></span>
-         </section>
-         <footer class = "details-page-footer">
-            <button class = "edit-details-button">Edit Appointment</button>
-         </footer>
-      </div>
-
-<!--        *******   this is the html for the edit page *******  -->
-
-      <div class = "edit-page off">
-         <header class = "edit-page-header">
-            <i class="fa fa-angle-left"></i>
-            <h5>Edit Your NSAppointment</h5>
-         </header>
-         <form class = "edit-page-form">
-<!-- these are the same feilds as for the original form, but we need to pass in the information already submitted as a placeholder or some other thing for the user to see/modify -->
-            <span id = "edit-appointment-name" class = "edit-appointment-input">
-               <label>NSAppointment Name</label>
-               <input id="editApptName" type = "text">
-            </span>
-            <span id = "edit-appointment-date" class = "edit-appointment-input">
-               <label>NSAppointment Date</label>
-               <input id = "editApptDate" type = "text">
-            </span>
-            <span id = "edit-appointment-time" class = "edit-appointment-input">
-               <label>NSAppointment Time</label>
-               <input id = "editApptTime" type = "text">
-            </span>
-            <span id = "edit-appointment-address" class = "edit-appointment-input">
-               <label>NSAppointment Address</location>
-               <input id="editApptAddress" type = "test">
-            </span>
-            <span id = "edit-appointment-city" class = "edit-appointment-input">
-               <label>NSAppointment City</location>
-               <input id="editApptCity" type = "test">
-            </span>
-            <span id = "edit-appointment-state" class = "edit-appointment-input">
-               <label>NSAppointment State</location>
-               <input id="editApptState" type = "test">
-            </span>
-            <span id = "edit-appointment-comments" class = "edit-appointment-input">
-               <label>NSAppointment Comments</label>
-               <textarea id="editApptComments"></textarea>
-            </span>
-         </form>
-         <footer class = "edit-page-footer">
-            <button class = "delete-appointment-button">DELETED</button>
-            <button class = "save-edit-button">SAVE EDITS</button>
-         </footer>
-      </div>
-   </div>
-<!-- this adds the jQuery -->
+   <script src="assets/JS/route.js"></script>
    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
    <script src="Assets/JS/pickadate.js-3.5.6/lib/picker.js"></script>
@@ -198,5 +21,14 @@
    <script src="Assets/JS/pickadate.js-3.5.6/lib/picker.time.js"></script>
    <script src="Assets/JS/pickadate.js-3.5.6/lib/legacy.js"></script>
    <script src = "Assets/JS/script.js"></script>
+</head>
+
+<body>
+   <div class = "whole-page">
+      <ng-view></ng-view>
+   </div>
+<!-- this adds the jQuery -->
+
+
 </body>
 </html>
